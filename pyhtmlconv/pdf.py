@@ -2,17 +2,20 @@
 Konversi html ke PDF.
 """
 
-from os import unlink
-from tempfile import NamedTemporaryFile
-from pdfkit import from_url
+from requests import get as http_get
 
-def html_to_pdf(url):
-    with NamedTemporaryFile(delete=False) as outfile:
-        from_url(url, outfile.name)
+from pdfkit import from_url, from_string
+from .tools import get_base_url, convert_static_link_to_absolute
 
-    bytes = b""
-    with open(outfile.name, "rb") as fp:
-        bytes = fp.read()
 
-    unlink(fp.name)
-    return bytes
+def html_to_pdf(url, absolute_link=True):
+    if absolute_link:
+        base_url = get_base_url(url)
+        r = http_get(url)
+        content = r.text
+        html = convert_static_link_to_absolute(content, base_url)
+        img_bytes = from_string(html, False)
+    else:
+        img_bytes = from_url(url, False)
+
+    return img_bytes

@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: pyhtmlconv
-Version: 1.1
+Version: 1.2
 Summary: pyhtmlconv: html converter (image / pdf)
 Home-page: https://github.com/aprilahijriyan/pyhtmlconv
 Author: Aprila Hijriyan
@@ -39,7 +39,7 @@ Description: pyhtmlconv: html converter (image / pdf)
         
 Keywords: html screenshot wkhtmltopdf converter image png jpeg pdf
 Platform: UNKNOWN
-Classifier: Development Status :: 4 - Beta
+Classifier: Development Status :: 5 - Production/Stable
 Classifier: Intended Audience :: Developers
 Classifier: License :: OSI Approved :: MIT License
 Classifier: Programming Language :: Python :: 2
