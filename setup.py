@@ -22,7 +22,7 @@ setup(
     license="MIT",
     author="Aprila Hijriyan",
     author_email="hijriyan23@gmail.com",
-    version="1.1",
+    version="1.2",
     packages=["pyhtmlconv"],
     url="https://github.com/aprilahijriyan/pyhtmlconv",
     description="pyhtmlconv: html converter (image / pdf)",
