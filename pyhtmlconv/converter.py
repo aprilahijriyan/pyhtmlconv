@@ -45,9 +45,6 @@ def html_converter(url, to, format=None):
     else:
         raise TypeError("Invalid file type: {!r}".format(to))
 
-    if isinstance(retVal, bytes):
-        retVal = retVal.decode("utf-8", "ignore")
-
     return retVal
 
 def convert_to_image(url, format, datauri=False):
@@ -56,7 +53,7 @@ def convert_to_image(url, format, datauri=False):
     """
 
     retVal = html_converter(url, "image", format)
-    if datauri:
+    if retVal and datauri:
         mimetype = "image/" + format.lower()
         retVal = convert_to_data_uri(retVal, mimetype)
 
@@ -68,15 +65,17 @@ def convert_to_pdf(url, datauri=False):
     """
 
     retVal = html_converter(url, "pdf")
-    if datauri:
+    if retVal and datauri:
         mimetype = "application/pdf"
         retVal = convert_to_data_uri(retVal, mimetype)
 
     return retVal
 
 def convert_to_data_uri(data, mimetype):
-    if isinstance(data, str):
-        data = data.encode("utf-8")
+    """
+    Konversi byte data ke data uri.
+    Reference: https://tools.ietf.org/html/rfc2397.
+    """
 
     data = b64encode(data).decode("utf-8")
     uri = "data:{0};base64,{1}".format(mimetype, data)
